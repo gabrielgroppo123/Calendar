@@ -13,18 +13,35 @@ struct NovoLembrete: View {
     var body: some View {
         ZStack{
             Rectangle()
-                .frame(width: 405, height: 820)
+                .frame(width: .infinity, height: 820)
                 .foregroundStyle(Color(.systemGray5))
                 .cornerRadius(40)
             VStack{
                 HStack{
-                    Image("Cancelar")
+                    ZStack{
+                        Circle()
+                            .frame(width: 44, height: 44)
+                            .foregroundStyle(Color(.systemGray4))
+                        Text("X")
+                            .foregroundStyle(.primary)
+                            .font(Font.custom("SFPro", size: 28))
+                    }
+                    
                     Text("Novo lembrete")
                         .padding(.horizontal, 20)
                         .fontWeight(.medium)
                         .font(Font.custom("SFPro", size: 32))
                         .foregroundStyle(.primary)
-                    Image("Confirmar")
+                    
+                    ZStack{
+                        Circle()
+                            .frame(width: 44, height: 44)
+                            .foregroundStyle(Color(.systemGray4))
+                        Image(systemName: "checkmark")
+                            .font(.system(size: 28))
+                            .foregroundColor(.primary)
+                    }
+                    
                 }
                 .padding(.top, 50)
                 
