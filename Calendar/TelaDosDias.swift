@@ -29,9 +29,6 @@ struct ContentView: View {
 
                 Spacer()
                     .frame(height: 25)
-
-                
-
                 HStack {
 
                     Button {
@@ -39,8 +36,8 @@ struct ContentView: View {
                     } label: {
 
                         Image(systemName: "arrow.left.circle")
-                            .font(.system(size: 46))
-                            .foregroundColor(.white)
+                            .font(.system(size: 44))
+                            .foregroundColor(.primary)
                     }
 
                     Spacer()
@@ -57,10 +54,10 @@ struct ContentView: View {
 
                         Image(systemName: "arrow.right.circle")
                             .font(.system(size: 44))
-                            .foregroundColor(.white)
+                            .foregroundColor(.primary)
                     }
                 }
-                .padding(.horizontal,40)
+                .padding(.horizontal, 80)
 
                 
 
@@ -69,7 +66,7 @@ struct ContentView: View {
                     ForEach(diaDaSemana.indices, id: \.self) { index in
 
                         Text(diaDaSemana[index])
-                            .foregroundStyle(.white.opacity(0.85))
+                            .foregroundStyle(.primary.opacity(0.85))
                             .font(.system(size: 24))
                             .frame(maxWidth: .infinity)
                             .padding(.bottom, 20)
@@ -94,7 +91,7 @@ struct ContentView: View {
 
                     Text("Lembretes")
                         .font(.system(size: 34,weight:.bold))
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
 
                     LinhaLembrete(
                         data: "20/07",
@@ -116,12 +113,13 @@ struct ContentView: View {
 
                     Text("Feriados")
                         .font(.system(size: 34,weight:.bold))
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
 
                 }
                 .padding(.horizontal)
 
             }
+            .padding(.top, 16)
 
         }
         .foregroundStyle(Color(.systemGray))

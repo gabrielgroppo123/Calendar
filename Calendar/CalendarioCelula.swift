@@ -27,7 +27,7 @@ struct CalendarioCelula: View {
 
                 Text(dia)
                     .font(.system(size: 20, weight: .medium))
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
 
             } else {
 
@@ -54,7 +54,7 @@ struct CalendarioCelula: View {
             return .gray
 
         default:
-            return .white
+            return .primary
         }
     }
 }
