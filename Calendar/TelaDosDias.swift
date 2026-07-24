@@ -23,102 +23,112 @@ struct TelaDosDias: View {
 
     var body: some View {
 
-        ScrollView(showsIndicators: false) {
+        NavigationStack {
 
-            VStack(spacing: 28) {
+            ScrollView(showsIndicators: false) {
 
-                Spacer()
-                    .frame(height: 25)
-                HStack {
-
-                    Button {
-
-                    } label: {
-
-                        Image(systemName: "arrow.left.circle")
-                            .font(.system(size: 44))
-                            .foregroundColor(.primary)
-                    }
+                VStack(spacing: 28) {
 
                     Spacer()
+                        .frame(height: 25)
 
-                    Text("July")
-                        .font(.system(size: 42, weight: .bold))
-                        .foregroundColor(Color("Atual"))
+                    HStack {
 
-                    Spacer()
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "arrow.left.circle")
+                                .font(.system(size: 44))
+                                .foregroundColor(.primary)
+                        }
 
-                    Button {
+                        Spacer()
 
-                    } label: {
+                        Text("July")
+                            .font(.system(size: 42, weight: .bold))
+                            .foregroundColor(Color("Atual"))
 
-                        Image(systemName: "arrow.right.circle")
-                            .font(.system(size: 44))
+                        Spacer()
+
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "arrow.right.circle")
+                                .font(.system(size: 44))
+                                .foregroundColor(.primary)
+                        }
+                    }
+                    .padding(.horizontal, 80)
+
+
+                    LazyVGrid(columns: columns, spacing: 0) {
+
+                        ForEach(diaDaSemana.indices, id: \.self) { index in
+
+                            Text(diaDaSemana[index])
+                                .foregroundStyle(.primary.opacity(0.85))
+                                .font(.system(size: 24))
+                                .frame(maxWidth: .infinity)
+                                .padding(.bottom, 20)
+                        }
+                    }
+
+
+                    LazyVGrid(columns: columns, spacing: 0) {
+
+                        ForEach(dias.indices, id: \.self) { index in
+
+                            CalendarioCelula(dia: dias[index])
+                        }
+                    }
+
+
+                    VStack(alignment: .leading, spacing: 22) {
+
+                        Text("Lembretes")
+                            .font(.system(size: 34, weight: .bold))
+                            .foregroundColor(.primary)
+
+
+                        NavigationLink {
+                            EditarLembrete()
+                        } label: {
+                            LinhaLembrete(
+                                data: "20/07",
+                                titulo: "Aniversário da mãe"
+                            )
+                        }
+                        .buttonStyle(.plain)
+
+
+                        LinhaLembrete(
+                            data: "24/07",
+                            titulo: "Entrega do projeto"
+                        )
+
+
+                        LinhaLembrete(
+                            data: "31/07",
+                            titulo: "Consulta médica"
+                        )
+
+
+                        Divider()
+                            .background(.gray)
+
+
+                        Text("Feriados")
+                            .font(.system(size: 34, weight: .bold))
                             .foregroundColor(.primary)
                     }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal, 80)
-
-                LazyVGrid(columns: columns, spacing: 0) {
-
-                    ForEach(diaDaSemana.indices, id: \.self) { index in
-
-                        Text(diaDaSemana[index])
-                            .foregroundStyle(.primary.opacity(0.85))
-                            .font(.system(size: 24))
-                            .frame(maxWidth: .infinity)
-                            .padding(.bottom, 20)
-                    }
-
-                }
-                LazyVGrid(columns: columns, spacing: 0) {
-
-                    ForEach(dias.indices, id: \.self) { index in
-
-                        CalendarioCelula(dia: dias[index])
-                    }
-                }
-
-                VStack(alignment:.leading,spacing:22){
-
-                    Text("Lembretes")
-                        .font(.system(size: 34,weight:.bold))
-                        .foregroundColor(.primary)
-
-                    LinhaLembrete(
-                        data: "20/07",
-                        titulo: "Aniversário da mãe"
-                    )
-
-                    LinhaLembrete(
-                        data: "24/07",
-                        titulo: "Entrega do trabalho"
-                    )
-
-                    LinhaLembrete(
-                        data: "31/07",
-                        titulo: "Dia de prova"
-                    )
-
-                    Divider()
-                        .background(.gray)
-
-                    Text("Feriados")
-                        .font(.system(size: 34,weight:.bold))
-                        .foregroundColor(.primary)
-
-                }
-                .padding(.horizontal)
-
+                .padding(.top, 16)
             }
-            .padding(.top, 16)
-
+            .foregroundStyle(Color(.systemGray))
+            .ignoresSafeArea()
         }
-        .foregroundStyle(Color(.systemGray))
-        .ignoresSafeArea()
-
     }
-
 }
 
 #Preview {

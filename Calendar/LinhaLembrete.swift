@@ -11,40 +11,36 @@ struct LinhaLembrete: View {
 
     let data: String
     let titulo: String
-    var action: () -> Void = {}
 
     var body: some View {
 
-        Button(action: action) {
-            HStack(spacing: 16) {
+        HStack(spacing: 16) {
 
-                Image(systemName: "calendar.circle.fill")
-                    .font(.title2)
-                    .foregroundStyle(.orange)
+            Image(systemName: "calendar.circle.fill")
+                .font(.title2)
+                .foregroundStyle(.orange)
 
-                VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 4) {
 
-                    Text(data)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-
-                    Text(titulo)
-                        .font(.headline)
-                        .foregroundStyle(.primary)
-                }
-
-                Spacer()
-
-                Text("Detalhes")
-
-                Image(systemName: "chevron.right")
+                Text(data)
+                    .font(.caption)
                     .foregroundStyle(.secondary)
+
+                Text(titulo)
+                    .font(.headline)
+                    .foregroundStyle(.primary)
             }
-            .padding()
-            .background(Color(.secondarySystemBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 16))
+
+            Spacer()
+
+            Text("Detalhes")
+
+            Image(systemName: "chevron.right")
+                .foregroundStyle(.secondary)
         }
-        .buttonStyle(.plain)
+        .padding()
+        .background(Color(.secondarySystemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 }
 
