@@ -33,7 +33,7 @@ struct LinhaLembrete: View {
             }
 
             Spacer()
-
+            Text("Detalhes")
             Image(systemName: "chevron.right")
                 .foregroundStyle(.secondary)
 
