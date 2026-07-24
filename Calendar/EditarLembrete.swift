@@ -46,7 +46,7 @@ struct EditarLembrete: View {
                 .padding(.top, 50)
                 
                 //Titulo
-                TextField("Título", text: $titulo)
+                TextField("Almoço de familia", text: $titulo)
                     .padding(.horizontal, 12)
                     .frame(width: 350, height: 66)
                     .background(Color(.systemGray3))
@@ -56,7 +56,7 @@ struct EditarLembrete: View {
                 
                 
                 //Descricao
-                TextField("Descrição", text: $descricao)
+                TextField("Almoço na tia Claudia as 12h", text: $descricao)
                     .padding(.horizontal, 12)
                     .padding(.bottom, 60)
                     .frame(width: 350, height: 136)
@@ -67,12 +67,12 @@ struct EditarLembrete: View {
                 HStack{
                     Text("Cor")
                         .font(Font.custom("SFPro", size: 25))
-                        .foregroundStyle(Color(.systemGray))
+                        .foregroundStyle(Color(.white))
                         
                     
                     Circle()
                         .frame(width: 44, height: 44)
-                        .foregroundStyle(Color(.systemGray))
+                        .foregroundStyle(Color(.lembrete1))
                         .padding(.trailing, 230)
                 }
                     
