@@ -13,30 +13,46 @@ struct CalendarioCelula: View {
 
     var body: some View {
 
-        ZStack {
+        if dia.isEmpty {
 
-            Rectangle()
-                .stroke(Color.gray.opacity(0.18), lineWidth: 0.5)
-                .frame(height: 82)
-
-            if dia == "15" {
-
-                Circle()
-                    .fill(Color("Atual"))
-                    .frame(width: 42, height: 42)
-
-                Text(dia)
-                    .font(.system(size: 20, weight: .medium))
-                    .foregroundColor(.primary)
-
-            } else {
-
-                Text(dia)
-                    .font(.system(size: 20, weight: .medium))
-                    .foregroundColor(textColor(for: dia))
-
+            ZStack {
+                Rectangle()
+                    .stroke(Color.gray.opacity(0.18), lineWidth: 0.5)
+                    .frame(height: 82)
             }
 
+        } else {
+
+            NavigationLink(destination: NovoLembrete()) {
+
+                ZStack {
+
+                    Rectangle()
+                        .stroke(Color.gray.opacity(0.18), lineWidth: 0.5)
+                        .frame(height: 82)
+
+                    if dia == "15" {
+
+                        Circle()
+                            .fill(Color("Atual"))
+                            .frame(width: 42, height: 42)
+
+                        Text(dia)
+                            .font(.system(size: 20, weight: .medium))
+                            .foregroundColor(.primary)
+
+                    } else {
+
+                        Text(dia)
+                            .font(.system(size: 20, weight: .medium))
+                            .foregroundColor(textColor(for: dia))
+
+                    }
+                }
+            }
+            
+            .tint(.primary)
+            .buttonStyle(.plain)
         }
     }
 
@@ -69,21 +85,24 @@ struct CalendarioCelula: View {
         "26","27","28","29","30","31",""
     ]
 
-    return ZStack {
+    NavigationStack {
 
-        Color.black
-            .ignoresSafeArea()
+        ZStack {
 
-        LazyVGrid(
-            columns: Array(repeating: GridItem(.flexible()), count: 7)
-        ) {
+            Color.black
+                .ignoresSafeArea()
 
-            ForEach(dias.indices, id: \.self) { index in
-                CalendarioCelula(dia: dias[index])
+            LazyVGrid(
+                columns: Array(repeating: GridItem(.flexible()), count: 7)
+            ) {
+
+                ForEach(dias.indices, id: \.self) { index in
+                    CalendarioCelula(dia: dias[index])
+                }
+
             }
-
+            .padding()
         }
-        .padding()
-
     }
 }
+

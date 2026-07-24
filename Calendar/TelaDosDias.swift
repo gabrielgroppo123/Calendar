@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct TelaDosDias: View {
 
     private let columns = Array(repeating: GridItem(.flexible(), spacing: 0), count: 7)
 
@@ -59,8 +59,6 @@ struct ContentView: View {
                 }
                 .padding(.horizontal, 80)
 
-                
-
                 LazyVGrid(columns: columns, spacing: 0) {
 
                     ForEach(diaDaSemana.indices, id: \.self) { index in
@@ -70,21 +68,15 @@ struct ContentView: View {
                             .font(.system(size: 24))
                             .frame(maxWidth: .infinity)
                             .padding(.bottom, 20)
-
                     }
 
                 }
-
-
                 LazyVGrid(columns: columns, spacing: 0) {
 
                     ForEach(dias.indices, id: \.self) { index in
 
                         CalendarioCelula(dia: dias[index])
-
                     }
- 
-
                 }
 
                 VStack(alignment:.leading,spacing:22){
@@ -130,5 +122,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    TelaDosDias()
 }
