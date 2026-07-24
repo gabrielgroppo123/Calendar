@@ -9,8 +9,8 @@ import SwiftUI
 
 struct Detalhes: View {
     @Environment(\.dismiss) var dismiss
-    
-   
+    @State private var irEditar: Bool = false
+    @State private var mostrarAlerta = false
     var body: some View {
         ZStack{
             Rectangle()
@@ -67,8 +67,10 @@ struct Detalhes: View {
                 }
                 .padding(.bottom, 30)
                 HStack{
+                    
+                    
                     Button {
-                        
+                        mostrarAlerta = true
                     } label: {
                         
                         ZStack{
@@ -78,14 +80,24 @@ struct Detalhes: View {
                                 .cornerRadius(40)
                             Text("Excluir")
                                 .foregroundStyle(.white)
+                                .font(Font.custom("SFPro", size: 20))
+                            
                         }
+                    }
+                    .alert("Confirmação", isPresented: $mostrarAlerta){
+                        Button("Não", role: .cancel){
+                        }
+                        Button("Sim", role: .destructive){
+                            excluirLembrete()
+                        }
+                    } message: {
+                        Text("Deseja excluir o lembrete?")
                     }
                     .padding(.horizontal, 12)
                     
-                    Button {
-                        
-                    } label: {
-                        
+                    Button(action:{
+                        irEditar = true
+                    }){
                         ZStack{
                             Rectangle()
                                 .frame(width: 137, height: 44)
@@ -93,7 +105,11 @@ struct Detalhes: View {
                                 .cornerRadius(40)
                             Text("Editar")
                                 .foregroundStyle(.white)
+                                .font(Font.custom("SFPro", size: 20))
                         }
+                    }
+                    .navigationDestination(isPresented: $irEditar){
+                        EditarLembrete()
                     }
                     .padding(.horizontal, 12)
                     
@@ -105,22 +121,11 @@ struct Detalhes: View {
         .ignoresSafeArea(.keyboard)
         .padding(.top, 30)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button(action: {
-                            dismiss()
-                        }) {
-                            Image(systemName: "chevron.left")
-                                .foregroundStyle(.primary)
-                                .padding(10)
-                                .background(Color("ColorSecondary"))
-                                .clipShape(Circle())
-                            }
-                            
-                        }
-                    }
+        .navigationBarBackButtonHidden(false)
     }
+    func excluirLembrete() {
+            print("Lembrete excluído!")
+        }
 }
 
 #Preview {
