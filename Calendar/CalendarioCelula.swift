@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CalendarioCelula: View {
-
+    @State private var irNovo = false
     let dia: String
 
     var body: some View {
@@ -23,8 +23,9 @@ struct CalendarioCelula: View {
 
         } else {
 
-            NavigationLink(destination: NovoLembrete()) {
-
+            Button(action:{
+                irNovo = true
+            }){
                 ZStack {
 
                     Rectangle()
@@ -49,6 +50,9 @@ struct CalendarioCelula: View {
 
                     }
                 }
+            }
+            .sheet(isPresented: $irNovo){
+                NovoLembrete()
             }
             
             .tint(.primary)
