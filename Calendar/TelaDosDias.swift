@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TelaDosDias: View {
 
+    @State private var irDetalhes = false
     private let columns = Array(repeating: GridItem(.flexible(), spacing: 0), count: 7)
 
     private let diaDaSemana = ["S","M","T","W","T","F","S"]
@@ -23,7 +24,7 @@ struct TelaDosDias: View {
 
     var body: some View {
 
-        NavigationStack {
+       
 
             ScrollView(showsIndicators: false) {
 
@@ -90,13 +91,18 @@ struct TelaDosDias: View {
                             .foregroundColor(.primary)
 
 
-                        NavigationLink {
-                            EditarLembrete()
+                        Button {
+                            irDetalhes = true
                         } label: {
                             LinhaLembrete(
                                 data: "20/07",
                                 titulo: "Aniversário da mãe"
                             )
+                        }
+                        .sheet(isPresented: $irDetalhes){
+                            NavigationStack {
+                                Detalhes()
+                            }
                         }
                         .buttonStyle(.plain)
 
@@ -123,11 +129,12 @@ struct TelaDosDias: View {
                     }
                     .padding(.horizontal)
                 }
-                .padding(.top, 16)
+               
             }
-            .foregroundStyle(Color(.systemGray))
+            .padding(.top, 16)
             .ignoresSafeArea()
-        }
+            .navigationBarBackButtonHidden(true)
+        
     }
 }
 

@@ -17,13 +17,31 @@ struct Detalhes: View {
                 .frame(width: .infinity, height: 820)
                 .foregroundStyle(Color(.systemGray5))
                 .cornerRadius(40)
+            
             VStack{
-                Text("Detalhes")
-                    .padding(.horizontal, 20)
-                    .fontWeight(.medium)
-                    .font(Font.custom("SFPro", size: 32))
-                    .foregroundStyle(.primary)
-                    .padding(.top, 50)
+                ZStack{
+                    Button(action: {
+                                dismiss()
+                    }) {
+                        ZStack{
+                            Circle()
+                                .frame(width: 44, height: 44)
+                                .foregroundStyle(Color(.systemGray4))
+                            Image(systemName: "chevron.left")
+                                .foregroundColor(.primary)
+                                .font(.system(size: 28))
+                                .clipShape(Circle())
+                        }}
+                                .padding(.trailing, 306)
+                                .padding(.top, 50)
+                                   
+                    Text("Detalhes")
+                        .padding(.horizontal, 20)
+                        .fontWeight(.medium)
+                        .font(Font.custom("SFPro", size: 32))
+                        .foregroundStyle(.primary)
+                        .padding(.top, 50)
+                }
                 
                 //Titulo
                 Text("Título")
@@ -67,49 +85,53 @@ struct Detalhes: View {
                 }
                 .padding(.bottom, 30)
                 HStack{
-                    
-                    
-                    Button {
-                        mostrarAlerta = true
-                    } label: {
-                        
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 137, height: 44)
-                                .foregroundStyle(Color(.systemGray4))
-                                .cornerRadius(40)
-                            Text("Excluir")
-                                .foregroundStyle(.white)
-                                .font(Font.custom("SFPro", size: 20))
+                    ZStack{
+                        Button {
+                            mostrarAlerta = true
+                        } label: {
                             
+                            ZStack{
+                                Rectangle()
+                                    .frame(width: 137, height: 44)
+                                    .foregroundStyle(Color(.systemGray4))
+                                    .cornerRadius(40)
+                                
+                                
+                            }
                         }
-                    }
-                    .alert("Confirmação", isPresented: $mostrarAlerta){
-                        Button("Não", role: .cancel){
+                        .alert("Confirmação", isPresented: $mostrarAlerta){
+                            Button("Não", role: .cancel){
+                            }
+                            Button("Sim", role: .destructive){
+                                excluirLembrete()
+                            }
+                        } message: {
+                            Text("Deseja excluir o lembrete?")
                         }
-                        Button("Sim", role: .destructive){
-                            excluirLembrete()
-                        }
-                    } message: {
-                        Text("Deseja excluir o lembrete?")
+                        Text("Excluir")
+                            .foregroundStyle(.primary)
+                            .font(Font.custom("SFPro", size: 20))
                     }
                     .padding(.horizontal, 12)
                     
-                    Button(action:{
-                        irEditar = true
-                    }){
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 137, height: 44)
-                                .foregroundStyle(Color(.blue))
-                                .cornerRadius(40)
-                            Text("Editar")
-                                .foregroundStyle(.white)
-                                .font(Font.custom("SFPro", size: 20))
+                    ZStack{
+                        Button(action:{
+                            irEditar = true
+                        }){
+                            ZStack{
+                                Rectangle()
+                                    .frame(width: 137, height: 44)
+                                    .foregroundStyle(Color(.blue))
+                                    .cornerRadius(40)
+                                
+                            }
                         }
-                    }
-                    .navigationDestination(isPresented: $irEditar){
-                        EditarLembrete()
+                        .sheet(isPresented: $irEditar){
+                            EditarLembrete()
+                        }
+                        Text("Editar")
+                            .foregroundStyle(.primary)
+                            .font(Font.custom("SFPro", size: 20))
                     }
                     .padding(.horizontal, 12)
                     
@@ -118,15 +140,21 @@ struct Detalhes: View {
             }
             
         }
+        .padding(.top, 40)
         .ignoresSafeArea(.keyboard)
-        .padding(.top, 30)
+        .ignoresSafeArea()
+        .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(false)
+        
     }
+}
+        
+                
+    
     func excluirLembrete() {
             print("Lembrete excluído!")
         }
-}
+
 
 #Preview {
     Detalhes()

@@ -87,6 +87,7 @@ struct TelaPrincipal: View {
 
                 Spacer()
             }
+            .ignoresSafeArea()
             .padding(.top, 16)
         }
     }

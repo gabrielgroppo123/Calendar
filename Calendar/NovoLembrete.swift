@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NovoLembrete: View {
+    @Environment(\.dismiss) private var dismiss
     @State var titulo: String = ""
     @State var descricao: String = ""
     var body: some View {
@@ -16,34 +17,40 @@ struct NovoLembrete: View {
                 .frame(width: .infinity, height: 820)
                 .foregroundStyle(Color(.systemGray5))
                 .cornerRadius(40)
-            VStack{
-                HStack{
-                    ZStack{
-                        Circle()
-                            .frame(width: 44, height: 44)
-                            .foregroundStyle(Color(.systemGray4))
-                        Text("X")
-                            .foregroundStyle(.primary)
-                            .font(Font.custom("SFPro", size: 28))
-                    }
-                    
-                    Text("Novo lembrete")
-                        .padding(.horizontal, 20)
-                        .fontWeight(.medium)
-                        .font(Font.custom("SFPro", size: 32))
-                        .foregroundStyle(.primary)
-                    
-                    ZStack{
-                        Circle()
-                            .frame(width: 44, height: 44)
-                            .foregroundStyle(Color(.systemGray4))
-                        Image(systemName: "checkmark")
-                            .font(.system(size: 28))
-                            .foregroundColor(.primary)
-                    }
-                    
-                }
-                .padding(.top, 50)
+            VStack {
+                HStack {
+                    ZStack {
+                            Button {
+                                dismiss()
+                            } label: {
+                                Circle()
+                                .frame(width: 44, height: 44)
+                                .foregroundStyle(Color(.systemGray4))
+                                
+                            }
+                                Text("X")
+                                    .foregroundStyle(.primary)
+                                    .font(.system(size: 28))
+                                }
+                                Text("Novo lembrete")
+                                    .padding(.horizontal, 20)
+                                    .font(.system(size: 32, weight: .medium))
+                                    .foregroundStyle(.primary)
+                                
+                                ZStack{
+                                Button {
+                                    dismiss()
+                                } label: {
+                                    Circle()
+                                        .frame(width: 44, height: 44)
+                                        .foregroundStyle(Color(.systemGray4))
+                                        }
+                                    Image(systemName: "checkmark")
+                                        .font(.system(size: 28))
+                                        .foregroundStyle(.primary)
+                                }
+                            }
+                            .padding(.top, 50)
                 
                 //Titulo
                 TextField("Título", text: $titulo)
@@ -81,7 +88,8 @@ struct NovoLembrete: View {
             
         }
         .ignoresSafeArea(.keyboard)
-        .padding(.top, 30)
+        .ignoresSafeArea()
+        .navigationBarBackButtonHidden(true)
     }
 }
 
